@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax入门</title>
+<script type="text/javascript">
+
+	xmlhttp = null;
+	
+	function sendAjax(){
+		//1、获取XMLHttpRequest对象
+		if(window.XMLHttpRequest){
+			xmlhttp = new XMLHttpRequest();
+		}else if(window.ActiveXObject){
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		
+		//2、设置回调函数
+		xmlhttp.onreadystatechange = callback;
+		
+		//3、设置请求方式及路径
+		var url = "http://localhost:8080/ajax/ajax";
+		xmlhttp.open("POST", url, true);
+		
+		//请求方式为post时，需要设置请求头 参数2<form>的默认 enctype属性
+		xmlhttp.setRequestHeader("content-type","application/x-www-form-urlencoded");
+		
+		//4、向服务器发送请求
+		xmlhttp.send(null);
+		
+	}
+	
+	//定义回调函数
+	function callback(){
+		if(xmlhttp.readyState == 4){	//4 == "loaded"
+			if(xmlhttp.status == 200){	//200 == OK
+				//5、得到服务器响应数据
+				alert(xmlhttp.responseText);
+			}
+		}else{
+			//alert("Problem retrieving XML data.");
+			alert("此时HTTP状态码: "+xmlhttp.readyState);
+		}
+	}
+</script>
+</head>
+<body>
+	<input type="button" value="按钮" onclick="sendAjax()"/>
+</body>
+</html>

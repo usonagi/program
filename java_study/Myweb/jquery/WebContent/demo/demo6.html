@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>过滤选择器  内容过滤选择器</title>
+<!-- 定义CSS样式  -->
+<style type="text/css">
+	.divColor {
+		color: yellow;
+	}
+</style>
+
+<script type="text/javascript" src="../js/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//1、设置含有java的div字体为红色
+		$("div:contains('Java')").css("color","red");  //contains(text)匹配包含给定文本的元素
+		
+		//2、设置没有子元素的div的文本内容为”“这是一个空DIV
+		$("div:empty").html("这是一个空的DIV");//empty匹配所有不包含子元素或文本的空元素
+		
+		//3、包含<a>元素的div字体颜色为黄色
+		//$("div:has(a)").css("color","yellow");  //has(selector)匹配 含有选择器所匹配的元素 的元素
+		$("div:has(a)").addClass("divColor");	//addClass()为每个匹配的元素添加指定的类名
+		
+		//4、设置所有含有子元素的span 的字体为蓝色
+		$("span:parent").css("color","blue");   //parent匹配含有子元素或文本的元素
+	});
+</script>
+</head>
+<body>
+	<div>Hello Java!</div>
+	<div>Hi Welcome to HNGXY</div>
+	<div></div>
+	<div>
+		<a>湖南工学院</a>欢迎你
+	</div>
+	<div>
+		努力学习<a>出人头地</a>
+	</div>
+	<div>
+		<span>即将毕业，不负韶华。</span>
+	</div>
+</body>
+</html>

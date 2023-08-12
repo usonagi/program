@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>案例 分页显示所有信息</title>
+		
+		<link rel="stylesheet" href="/web_example/bootstrap/css/bootstrap.min.css" >
+    	<script src="../js/jquery-3.4.1.min.js"> </script>
+    	<script src="../bootstrap/js/bootstrap.min.js" ></script>
+    	
+    	<script type="text/javascript">
+    	
+    		//设置分页  默认页面  每页条数 总页数  总条数
+			var pageNO = 1;
+			var pageSize = 5;
+			var totalPage = 5;
+			var totalCount = 0;
+    	
+    		//页面加载完成后，向服务器发送请求，来获取产品信息，在table中显示出来
+    		$(function(){
+    			
+    			skipPage(pageNO);	//默认第一页
+    			
+    		});
+    		
+    		//处理页面跳转的函数
+    		function skipPage(pageNum){
+    			
+    			pageNO = pageNum;
+    			
+    			var url = "/web_example/product";
+    			
+    			$.post(url,{"pageNO":pageNO,"pageSize":pageSize},function(data){
+    				//遍历json数据
+    				//var jsonObj = eval(data);
+    				
+    				//遍历json数据，将分页所需数据与服务器响应数据同步
+    				var json = eval(data);
+    				var jsonObj = json.content;	//得到分页数据
+    				pageNO = json.pageNo;
+    				pageSize = json.pageSize;
+    				totalPage = json.totalPage;
+    				totalCount = json.totalCount;
+    				
+    				//向table中添加产品信息
+    				var pinfo = "";
+    				for(var i=0; i < jsonObj.length; i++)
+    				{
+    					pinfo += "<tr>";
+    					pinfo += "<td>"+jsonObj[i].id+"</td><td>"
+    								+jsonObj[i].name+"</td><td>"
+    								+jsonObj[i].count+"</td><td>"
+    								+jsonObj[i].price+"</td>";
+    					pinfo += "</tr>";
+    				}
+    				
+    				//展示分页条
+    				var pageMsg = "<ul class='pagination pagination-sm'>";
+    				
+    				//处理上一页 
+    				if(pageNO == 1){
+    					pageMsg += "<li class='disabled'><a href='#'>&laquo;</a></li>";
+    				}else{
+    					pageMsg += "<li><a href='javascript:void(0)' onclick=skipPage("+(pageNO-1)+")>&laquo;</a></li>";
+    				}
+    				
+    				for(var i=1; i <= totalPage;i++)
+    				{
+    					//当前页码与i一致，则高亮显示当前页码
+    					if(i == pageNO){
+    						pageMsg += "<li class='active'><a href='javascript:void(0)' onclick='skipPage("+i+")'>"+i
+    									+"<span class='sr-only'>(current)</span></a></li>";
+    					}else{
+    						pageMsg += "<li><a href='javascript:void(0)' onclick='skipPage("+i+")'>"+i+"</a></li>";
+    					}
+    				}
+    			
+    				//处理下一页
+    				if(pageNO == totalPage){
+    					pageMsg += "<li class='disabled'><a href='#'>&raquo;</a></li>";
+    				}else{
+    					pageMsg += "<li><a href='javascript:void(0)' onclick='skipPage("+(pageNO+1)+")'>&raquo;</a></li>";
+    				}
+    				
+    				pageMsg += "</ul>";
+    				
+    				//清空table，使其恢复成初始状态
+    				$("#tab").html("<tr><td>序号</td><td>名称</td><td>数量</td><td>价格</td></tr><tr><td colspan='4'><nav id='fy'></nav></td></tr>");
+    				    				
+    				//向分页条中添加分页信息
+    				$("#fy").append(pageMsg);
+    				
+    				//在table的第一个tr后面插入数据
+    				$("#tab tr:nth-child(1)").after(pinfo);
+    			},"json");
+    		}
+    	</script>
+    	
+		<style type="text/css">
+			div{
+				width:70%;
+				margin-left: 200px;
+				margin-top: 100px;
+			}
+		</style>
+    	
+	</head>
+	
+	<body>
+	<div align="center" id="d">
+	  <table border="1" width="100%" id="tab">	<!-- class="table table-bordered" 显示不出表格边框-->
+	    <tr>
+	      <td>序号</td>
+	      <td>名称</td>
+	      <td>数量</td>
+	      <td>价格</td>
+	    </tr>
+	    
+	    <tr>
+	      <td colspan="4">
+	       <nav id="fy"></nav>
+	      </td>
+	    </tr>
+	  </table>
+	  
+	</div>
+	</body>
+</html>

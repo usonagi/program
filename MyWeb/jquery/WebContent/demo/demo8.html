@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>过滤选择器 属性过滤选择器</title>
+<script type="text/javascript" src="../js/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//设置所有含有id属性的div 字体颜色为红色
+		$("div[id]").css("color","red");	//[attribute]匹配包含给定属性的元素
+		
+		//获取name=username的value值
+		//alert($("[name='username']").val());	//[attribute=value] 匹配给定属性是某个特定值的元素
+		
+		//设置所有多选框被选中
+		//$("input[type='checkbox']").attr("checked",true);	//attr()设置或返回被选元素的属性值
+		//alert($("input[type='checkbox'][class*='x1']").attr("value"));
+		
+		//设置class中含有x的多选框被选中
+		//^=:匹配属性以某些开始的元素  $=:匹配属性以某些值结束的元素   *=:匹配属性包含某些值的元素
+		$("input[type='checkbox'][class*='x']").attr("checked",true);
+	});
+</script>
+</head>
+<body>
+	<div id="d">
+		这是一个DIV
+	</div>
+	<form>
+		<input type="text" name="username" value="Tom"><br>
+		<input type="checkbox" class="x1" name="food" value="米饭">米饭
+		<input type="checkbox" class="x2" name="food" value="牛奶">牛奶
+		<input type="checkbox" class="x3" name="food" value="牛肉">牛肉
+		<hr>
+		<input type="checkbox" class="y1" name="hobby" value="篮球">篮球
+		<input type="checkbox" class="y2" name="hobby" value="排球">排球
+		<input type="checkbox" class="y3" name="hobby" value="足球">足球
+	</form>
+	<span id="s">
+		这是一个SPAN
+	</span>
+</body>
+</html>

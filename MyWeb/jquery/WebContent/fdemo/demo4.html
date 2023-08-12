@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQuery事件</title>
+<script type="text/javascript" src="../js/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//这种是jquery提供的简化绑定事件操作
+		//$("#btn").click(function(){
+		//	alert("jquery");
+		//});
+		
+		//bind()用于绑定事件	unbind()用于解除绑定
+		/* $("#btn3").bind("click",function(){
+			alert("jquery");
+		}); */
+		//$("#btn3").unbind("click");
+		
+		//也可以使用live进行事件绑定	die进行解除绑定
+		/* $("#btn3").live("click",function(){
+			alert("jquery live");
+		});
+		$("#btn3").die("click"); */
+		
+		//live与bind的区别：bind只能为已存在的元素进行绑定，live可以为没有存在，后续通过代码添加的元素进行绑定。
+		/* $(":button").live("click",function(){	//$("[id='btn1'],[id='btn2']")选取按钮1，2
+			alert("hello jquery");
+		});
+		$("body").append($("<input type='button' id='btn9' value='按钮X'/>")); */
+		
+		//使用one方法为按钮绑定一次性事件，对表单使用，避免重复提交。
+		/* $("#btn4").one("click",function(){
+			alert("only one...");
+		}); */
+		
+		//trigger()在每一个匹配的元素上触发某一类事件
+		/* $("#btn3").click(function(){
+			alert("click btn3...");
+		});
+		$("#btn3").bind("mouseover",function(){
+			$(this).trigger("click");	//触发事件绑定函数click
+		}); */
+		
+		//hover()是一个模仿悬停事件的方法
+		$("div").hide();	//将div隐藏，并给h3添加hover
+		$("h3").hover(function(){
+			//鼠标移到h3上执行  显示内容
+			//$("div").show(2000);
+			//$("div").slideDown(200);
+			$("div").fadeIn(3000);
+		},function(){
+			//鼠标离开h3执行  隐藏内容
+			//$("div").hide(2000);
+			//$("div").slideUp(2000);
+			$("div").fadeOut(2000);
+		});
+		
+		//toggle()用于绑定两个或多个事件处理函数
+		//每次点击就会切换一张图片
+		$("img").toggle(function(){
+			$(this).attr("src","../image/img2.jpg");	//第一次点击
+		},function(){
+			$(this).attr("src","../image/img3.jpg");	//第二次点击
+		},function(){
+			$(this).attr("src","../image/img1.jpg");	//第三次点击
+		});
+	});
+	
+	
+	//传统的JavaScript中绑定事件
+	//方法1、通过onclick属性绑定函数
+	/* function fun1(){
+		alert("hello");
+	} */
+	
+	//方法2、推荐这种方法，可以在function中调用其他函数
+	/* window.onload=function(){
+		document.getElementById("btn2").onclick=function(){
+			fun1();
+			alert("hello 方法2");
+		}
+	}; */
+</script>
+</head>
+<body>
+	<h3>jQuery的简单介绍</h3>
+	<div>
+		jQuery是一个快速、简洁的JavaScript框架。<br>
+		它封装了JavaScript常用的功能代码，提供一种简便的JavaScript设计模式。<br>
+		学而时习之，不亦说乎；有朋自远方来，不亦乐乎；人不知而不愠，不亦君子乎。<br>
+		谈笑有鸿儒，往来无白丁。可以调素琴，阅金经。无丝竹之乱耳，无案牍之劳形。<br>
+	</div>
+	<hr>
+	
+	<h3>图片</h3>
+	<img src="../image/img1.jpg" width="120" height="120">
+	<hr>
+	
+	<input type="button" id="btn1" value="按钮" onclick="fun1()"/>
+	<input type="button" id="btn2" value="按钮"/>
+	<hr>
+	
+	<h3>使用jQuery进行事件绑定</h3>
+	<input type="button" id="btn3" value="按钮"/>
+	<input type="button" id="btn4" value="按钮"/>
+	
+</body>
+</html>

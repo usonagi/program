@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>层级选择器</title>
+<script type="text/javascript" src="../js/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var size;
+		//1、获取id=d的所有<a>子元素
+		//size = $("#d a").size();
+		
+		//2、获取id=d的直接子元素
+		//size = $("#d>a").size();
+		
+		//3、获取id=d的第一个<p>兄弟元素
+		//alert($("#d+p").html());
+		
+		//4、获取id=d的所有<p>兄弟元素
+		//size = $("#d~p").size();
+		
+		//alert(size);
+		
+		//5、将id=d元素下的所有子元素<a>的字体颜色变红
+		$("#d a").css("color","red");
+	});
+</script>
+</head>
+<body>
+	<div id="d">
+		<a>Hello java & world</a>
+		<p>
+			<a>hngxy xmy</a>
+		</p>
+		<a>hngxy xxx</a>
+	</div>
+	<p>hngxy first</p>
+	<p>hngxy second</p>
+</body>
+</html>

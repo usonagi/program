@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<div id="d1">张三</div>
+<input type="button" value="按钮1" onclick="change01()"/>
+
+<div id="app">
+	{{message}}
+	<p>{{film}}</p>
+	<input type="button" value="按钮2" @click="change02"/>
+</div>
+
+<!-- 引入vue.js文件 -->>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	//js函数定义 function 函数名（）{}
+	function change01(){
+		document.getElementById("d1").innerHTML='hello world';
+	}
+	
+	//
+	let vue = new Vue({
+		el:'#app',
+		data:{
+			message:'zhangsan',
+			film:'八百'
+		},
+		methods:{
+			change02:function(){
+				this.message = 'hello';
+			}
+		}
+	});
+	
+</script>
+
+
+</body>
+</html>

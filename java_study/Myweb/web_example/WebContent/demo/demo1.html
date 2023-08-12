@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>案例 关联选项-省市联动二</title>
+<script type="text/javascript" src="/web_example/js/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//页面加载完成后向服务器发送请求来获取省份信息
+		var url = "/web_example/city";
+		$.post(url+"?method=pro",function(data){
+			//遍历jsonObj得到省份名称
+			var jsonObj = eval(data);
+			$(jsonObj).each(function(){
+				var pname = this.name;
+				//将省份名称添加到<option>，再添加到对应的下拉框
+				$("#province").append($("<option>"+pname+"</option>"));
+			});
+		},"json");
+		
+		//选择省份后，再次向服务器发送请求
+		$("#province").change(function(){
+			//清理当前的城市下拉框
+			$("#city").html("<option>---请选择城市---</option>");
+			
+			var pname = $(this).val();
+			//获取省份对应的城市  将省份名称传递给服务器
+			$.post(url+"?method=city",{"pname":pname},function(data){
+				//遍历服务器的响应数据，将城市名添加到对应的下拉框
+				var jsonObj = eval(data);
+				$(jsonObj).each(function(){
+					var cityName = this.name;
+					$("#city").append($("<option>"+cityName+"</option>"));
+				});
+			},"json");
+		});
+	});
+</script>
+</head>
+<body>
+	<select id="province">
+		<option>---请选择省份---</option>
+	</select>省 
+	
+	<select id="city" >
+		<option>---请选择城市---</option>
+	</select>市
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>使用request接收表单参数</h1>
+<form action="/web_test/RequestDemo2" method="get">
+	用户名:<input type="text" name="username">
+	密码:<input type="text" name="password"> <br/>
+	性别:<input type="radio" name="sex" value="man">男<input type="radio" name="sex" value="woamn">女<br/>
+	籍贯:<select name="city">
+		<option value="beijing">北京市</option>
+		<option value="shanghai">上海市</option>
+		<option value="shenzhen">深圳市</option>
+	</select><br/>
+	爱好:<input type="checkbox" name="hobby" value="game">游戏
+	<input type="checkbox" name="hobby" value="study">学习
+	<input type="checkbox" name="hobby" value="read">阅读 <br/>
+	自我介绍:<textarea name="info" rows="3" cols="8"></textarea><br/>
+	<input type="submit" value="提交">
+	
+</form>
+</body>
+</html>

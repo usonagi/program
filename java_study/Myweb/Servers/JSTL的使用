@@ -1,0 +1,24 @@
+jstl：jsp的标准标签库
+
+作用：主要和EL用来取代传统页面上直接嵌入Java代码的写法。
+
+JSTL重要的标签库：c标签(core标签库)、jstl函数库(EL函数)
+
+在jsp上引入核心库，别名(prefix)为c
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
+if标签的使用
+	只有if标签，没有else标签。
+	test属性：	条件。
+	var属性：	将test中的值赋给一个变量，在var中定义变量。
+	scope属性：	作用范围。
+	<c:if var="i" test="${ i >= 10 }" scope="page"> 条件成立，则显示  </c:if>
+	
+for标签的使用		演示web02/demo6/demo1
+	<c:forEach var="s" items="${ arrs }">
+			${ s }
+	</c:forEach>
+	
+
+案例：web-login/        jar包：c3p0,dbuitls,jdbc,jstl,standard

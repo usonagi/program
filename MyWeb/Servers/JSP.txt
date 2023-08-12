@@ -1,0 +1,89 @@
+Java Server Pages  java服务器端页面	是HTML+java代码+jsp自身的东西
+
+JSP在执行时，会被服务器翻译成Servlet执行，jsp就是一个servlet
+
+JSP的脚本元素：
+	<%! %> JSP声明，翻译成Servlet成员部分的内容。声明变量，方法，内部类
+	<%= %> 翻译成out.print()，在service方法内部。用于生成HTML页面源码
+	<%  %> 嵌入java代码，翻译成service方法内部的代码块。声明变量，内部类
+	
+JSP的注释 <%-- jsp的注释 --%>
+
+
+JSP指令元素作用
+	.用于指示jsp执行的某些步骤。
+	.用于指示jsp变现特定行为。
+
+JSP指令元素的语法
+	<%@ 指令名称 属性名称=属性的值 属性名称=属性的值%>
+
+JSP指令元素的分类 	只有import属性可以出现多次，其他属性只能出现一次。
+	.Page指令：指示jsp的页面设置属性和行为。
+		laguage属性：声明使用脚本的语言。只能是Java。
+		extends属性：标明jsp编译成servlet时继承的类。默认值HttpsBase
+		session属性：标明jsp中是否可以直接使用session对象。默认值true
+		buffer属性：	标明jsp对客户端输出缓冲区大小。
+		autoFlush属性：若缓冲区大小溢出，是否自动刷出。默认值true
+		
+		import属性：用于导入java包和类。
+		contentType属性：标明jsp被浏览器解析和打开时采用的默认字符集。
+		pageEncoding属性：jsp文件及jsp翻译后的servlet保存到硬盘上采用的字符集。
+		
+		isErrorPage属性：处理jsp页面异常。与errorPage配套使用。
+		errorPage属性：处理jsp页面异常。
+		isELIgnored属性：通知jsp是否忽略EL表达式。默认值false。
+		
+	.include指令：指示jsp包含哪些其他页面。
+		格式：<%@ include 属性名=属性值%>
+		作用：在jsp页面中静态包含一个文件，同时由该jsp解析包含的文件内容。
+		file属性：指示jsp页面包含页面路径。
+		注意：应该将被包含的页面的结构去掉。在被包含的页面中定义的变量，在包含页面也可以使用。
+		
+	.taglib指令：指示JSP页面包含哪些标签库。
+		格式：<%@ taglib 属性名=属性值%>
+		作用：用于在jsp页面中引入标签库。
+		uri属性：引入标签库的路径。
+		prefix属性：引入标签库的别名。
+		
+
+jsp的内置对象：指的是可以直接在JSP页面中使用的对象。有9大内置对象。
+	request:		从客户端向服务器发送的请求对象。			
+	response:	从服务器向客户端浏览器做出响应的对象。
+	session:	服务器为客户端创建会话对象。
+	application:代表应用。获得servletContext对象。
+	out:		向输出流写入内容的对象。
+	page:		当前的JSP翻译成servlet后的对象的引用。
+	pageContent:本JSP的页面的上下文对象。
+	config:		本JSP的ServletConfig对象。
+	exception:	表示JSP页面运行时产生的异常对象。
+	
+jsp的内置对象具体类型  与上述一一对应
+	HttpServletRequest,HttpServletResponse,HttpSession,HttpContext,
+	JspWriter,Object,PageContext,ServletConfig,Throwable
+	
+
+pageContext对象
+	页面上下文对象，代表的是当前页面运行的一些属性。
+	作用：提供了page范围的数据存取的方法：
+			向page范围内存入数据：setAttribute(String name,Object value)
+			从page范围获取数据：getAttribute(String name)
+			从page范围移除数据：removeAttribute(String name)
+			查找属性的方法：findAttribute(String name)
+			
+		  通过这个对象获得其他8个内置对象：
+		  	获得其他8个内置对象的方法 getXxx()
+		  	
+		  	
+JSP的四个作用范围		演示web-02/demo3
+	页面范围：当前页面内有效，出了这个页面，用pageContext保存的数据就无效了。
+	请求范围：从客户端向服务器发送一次请求，服务器做出响应后，request保存的数据就无效了。
+	会话范围：每个浏览器向服务器发送请求(多次请求)。会话结束后(关闭浏览器)，session保存的数据就无效了。
+	应用范围：用application保存的数据在整个应用中任意地方都可以获取。
+	
+	
+JSP的动作标签			演示web-02/demo4
+	概述：用于在JSP页面中提供业务逻辑功能，避免在JSP页面中直接编写代码，导致难以维护。
+	常用动作标签：
+		<jsp:forward/>:请求转发。
+		<jsp:include/>:包含(动态包含)。
+		<jsp:param/>:传递参数。	很少用

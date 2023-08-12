@@ -1,0 +1,73 @@
+ajax(即异步JavaScript和XML)，是指一种创建交互式网页应用的网页开发技术。
+
+Ajax通过在后台与服务器进行少量数据交换，使网页实现异步更新。这意味着可以在不重新
+	加载整个页面的情况下，对网页的某部分进行更新。
+
+发送一个Ajax请求：		====演示  ajax/demo.htnl
+	1、获取一个XMLHttpRequest对象
+		if(window.XMLHttpRequest){
+			xmlhttp = new XMLHttpRequest();
+		}else if(window.ActiveXObject){
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+	2、设置一个回调函数		xmlhttp.onreadystatechange = 回调函数;
+	3、设置请求方式和URL		xmlhttp.open(方法，URL，true);
+	4、向服务器发送请求		xmlhttp.send(null);   null是请求参数
+	5、在回调函数中获取服务器响应的数据	
+		回调函数(){
+			if(xmlhttp.readyState == 4){	//4 == "loaded"
+				if(xmlhttp.status == 200){	//200 == OK
+					//5、得到服务器响应数据
+					alert(xmlhttp.responseText);
+				}
+			}else{  alert("Problem retrieving XML data."); }  }
+			
+
+XMLHttpRequest对象		参考w3school手册
+	获取对象：对于大部分浏览器可以直接通过new XMLHttpRequest(); 
+			 对于IE5、IE6使用new ActiveXObject("Microsoft.XMLHTTP");
+	
+	常用属性：
+		onreadystatechange 用于绑定回调函数，可以在回到函数中对服务器响应的数据进行处理。
+		readyState 描述的是http的请求状态：0--初始化状态 。 1--open方法以调用，但send方法未调用。请求还没有被发送。
+				2--send方法已调用，HTTP请求已发送到服务器。未接收到响应。  3--所有响应头部都已经接收到。响应体开始接收但未完成。
+				4--HTTP响应已经完全接收。
+		status  描述的是http状态码。   查看HTTP协议.txt
+		responseText或responseXML  用于获取服务器响应数据。
+		
+	常用方法：
+		open  用于设置请求方式、url及是否异步。初始化HTTP请求参数，但不发送请求。参数1：请求方式   参数2：url路径   参数3：设置是否异步，默认true异步。
+		send  向服务器发送HTTP请求。请求方式是get时，使用send(null)，因为get方式没有请求体。
+		setRequestHeader  请求方式是post时，需要使用此方法设置请求头。参数1：content-type  参数2：是<form>标签的enctype属性
+		
+
+jQuery的Ajax开发		=====演示 案例ajax/example/demo3.html   
+	常用的方法 load(url,[data],[callback])  url-待装入HTML网址  data-发送至服务器的数据  callback-载入成功时回调函数
+	注意：load方法是将服务器响应的数据直接插入到指定的dom元素中。load方法有参数时，请求方式是post；无参数时，请求方式是get。
+	
+	$.ajax是jQuery中最基本的ajax操作，但使用比较繁琐，不推荐使用。
+	
+	$.get与$.post针对get与post请求 两者使用格式相同   这两个方法比较重要
+	格式：jQuery.post(url,[data],[callback],[type]) url-发送请求地址，data-待发送数据，callback-发送成功时回调函数，type-返回内容的格式
+	
+	=====XStream学习：/ajax/com.xml 案例省市联动 二  web_example/demo/(CityServlet)demo2.html
+	使用XStream工具完成xml与java对象之间的转换(主要)。也可以完成java对象与json之间的转换。
+	使用XStream需要导入xstream-1.4.9.jar,xpp3_mi-1.1.4c.jar,xmlpull-1.1.3.jar。
+	使用XStream的注解需要开启注解扫描，并在对应的类的合适位置添加相应的操作，例如 @XStreamAlias("别名")
+	
+	
+Ajax的跨域问题	
+	跨域--指不同的域名(服务器)之间的的互相的资源的访问。 一般是在自己的工程内部会出现跨域的情况。
+	正常情况下，因为浏览器的安全问题，不同域的资源是不可以访问的。
+	跨域的三种解决方案：
+		1、代理。前端页面访问本地的服务器，本地服务器访问其他的资源，是服务器端的跨域问题解决。
+		2、jsonp。使用<script>标签的开放策略，网页可用得到从其他来源动态产生的JSON资料。
+		3、XHR2 全称 XMLHttpRequestLevel2。是HTML5提供的方法，一般是在移动开发中使用。
+		
+	jquery解决跨域操作 常用第二种方式	====演示：web_example/demo3 
+		$.ajax解决跨域  	json格式：{value,value},{name:value}  jsonp格式：callback(json)
+			1、在页面设置$.ajax()的相关参数。	2、在服务器端(页面请求的url)设置返回数据类型
+		$.getJSON 解决跨域  --$.ajax的简化操作 
+	
+	
+	

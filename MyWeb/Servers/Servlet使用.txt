@@ -1,0 +1,152 @@
+Servlet是一个运行在web服务器上的小的java程序，使用http协议处理从web客户端发送的请求，并做出响应。
+
+
+使用Servlet：
+	1、编写实现Servlet接口的Java类。
+	2、配置Servlet。 在WEB-INF下web.xml中配置
+		  <!-- 配置Servlet -->
+		  <servlet>
+		  	<!-- Servlet名称 -->
+		  	<servlet-name>ServletDemo</servlet-name>
+		  	<!-- Servlet全路径 -->
+		  	<servlet-class>com.servlet.demo.ServletDemo3</servlet-class>
+		  </servlet>
+		  
+		  <!-- 配置Servlet的映射 -->
+		  <servlet-mapping>
+		  	<servlet-name>ServletDemo</servlet-name>
+		  	<!-- 配置访问路径 -->
+		  	<url-pattern>/ServletDemo</url-pattern>
+		  </servlet-mapping>
+	3、访问Servlet。localhost:8080/web_test/Hello
+	
+	
+Servlet的关系实现
+	servlet接口 -- GenericServlet类 ：通用的Servlet -- HttpServlet类 ：http专用的Servlet
+	通常编写一个Servlet都会让该Servlet继承HttpServlet重写service方法。
+	在service方法内部根据请求方式不同执行不同的doXxx方法。所以往往只重写doGet和doPost方法，不重写service方法。
+	因为通常处理请求的代码都是一致的，因此需要让doGet和doPost互相调用，简化编程。
+	
+
+Eclipse中使用Servlet模板
+	使用eclipse开发Servlet，不用在web.xml中修改，自动完成Servlet的配置
+	1、new --Servlet  Servlet名称 --【next】 Name-Servlet名称  URL mappings-路径  --【next】 选择配置--【finish】
+
+
+Servlet的生命周期	demo3
+	在第一次被访问时执行init方法被实例化，直到Servlet被从服务器中移除或服务器关闭时，Servlet对象被销毁执行destroy方法。
+
+
+启动时加载  demo4 --让服务器启动时创建Servlet对象
+	<!-- 配置启动时加载  数字越小启动优先级越高 从数字2开始 -->
+  	<load-on-startup>2</load-on-startup>
+  	
+
+Servlet访问路径配置	demo5
+	<url-pattern>的三种配置方式：
+		完全路径匹配：以/开始 				例：/ServletDemo2
+		目录匹配：	以/开始，以*结束		例：/*   /xxx/fff/*
+		扩展名匹配：	不能以/开始，以*开始	例：*.jsp  *.action
+	访问优先级：完全路径匹配 》 目录匹配 》 扩展名匹配
+	
+	<!-- 完全路径匹配 -->
+  	<!-- <url-pattern>/ServletDemo5</url-pattern> -->
+  	<!-- 目录匹配  *代表任意字符-->
+  	<!-- <url-pattern>/xxx/*</url-pattern> -->
+  	<!-- 扩展名匹配 -->
+  	<url-pattern>*.xxx</url-pattern>
+	
+	
+ServletConfig对象  --用来获得servlet的相关配置的对象
+	getServletConfig() 获得ServletConfig对象	
+	ServletConfig对象API演示 	demo6
+	
+	<!-- 配置Servlet的初始化参数 -->
+  	<init-param>
+  		<param-name>username</param-name>
+  		<param-value>sa</param-value>
+  	</init-param>
+	
+	
+ServletContext对象  --Servlet的上下文对象，对servlet之前和之后的内容都知道
+	一个web对象只有一个ServletContext对象，在服务器启动时为每个web项目创建一个单独的ServletContext对象。
+	作用：用来获取web项目信息
+	方法：
+		String getMimeType(String file) 获取文件的mime类型
+		String getContextPath() 获取web项目的工程名
+		String getInitParameter(String name)   Enumeration getInitParameterNames() 
+		获取web项目的全局初始化参数(可以获取多个Servlet)
+		
+			<!-- 全局初始化参数的配置 -->
+		  	<context-param>
+		  		<param-name>UserName</param-name>
+		  		<param-value>xmy</param-value>
+		 	</context-param>
+	
+	作用：读取web项目下的文件  使用传统的IO流读取会出问题，因此使用ServletContext对象来读取。
+	方法：ServletDemo7
+	
+	作用：作为域对象存取数据，  作用范围：整个web项目
+	方法：
+		void setAttribute(String name,Object object) 存入数据
+		Object getAttribute(String name)  获取数据
+		void removeAttribute(String name)  移除数据
+	
+
+Response对象的API	web_test/ServletDemo8
+	关于响应行的方法：
+		void setStatus(int sc) 设置响应的状态码
+	关于响应头的方法：set开头的方法是针对一个key对应一个value的情况 		add开头的方法是针对一个key对应多个value的情况
+		void setHeader(String name,int value)
+	关于响应体的方法：
+		getOutputStream()  getWrite() 设置向页面输出的内容
+	其他方法：
+		void setRedirect(String location)  重定向的方法
+		void setContentType(String type)  设置浏览器打开页面时采用的字符集
+		void setCharacterEnconding(String charset)  设置响应字符流缓冲区字符集
+		void addCookie(Cookie cookie)  服务器向浏览器回写Cookie的方法
+		
+
+Request对象的API		RequestDemo1\2\3
+	获得客户机信息的方法：
+		String getMethod()	获得请求的方式	
+		String getQueryString()	获得请求路径后的字符串
+		String getRequestURI() String getRequestURL()  获得请求路径的url/uri
+		String getRemoteAddr()  获得客户端的IP地址
+	获得请求头的方法：
+		String getHeader(String name) 获得一个key对应一个value的请求头
+		Enumeration getHeaderNames()/getHeaders()  获得 多key对一value /一对多 的请求头
+	获得请求参数的方法：
+		String getParameter(String name) 获得提交的参数(一个name对应一个value)
+		STring getParameterValues(String name)  获得提交的参数(一个name对应多个value)
+		Map getParameterMap() 获得提交的参数，将提交的参数的名称和对应的值存入map
+	Request作为域对象存取数据的方法：
+		void setAttribute(String name,Object object) 向Request域中存数据
+		Object getAttribute(String name)  从Request域中获取数据
+		void removeAttribute(String name)  从Request域中移除数据
+		
+		
+Servlet的域对象总结： 重点！！！
+	请求范围(ServletRequest):
+		创建：当用户向服务器发送一次请求，服务器创建一个request对象。
+		销毁：当服务器对这次请求做出了响应，服务器就会销毁这个request对象。
+		存取数据： void setAttribute(String name,Object value)
+				 Object getAttribute(String name)
+		作用范围：一次请求。(转发就是一次请求)
+		
+	会话范围(HttpSession):
+		创建：服务器第一次调用getSession()方法的时候。
+		销毁：三种情况：
+				1、Session过期，默认的过期时间30分钟。
+				2、非正常关闭服务器。正常关闭服务器，session会被序列化。
+				3、手动调用session.invalidate();
+		存取数据： void setAttribute(String name,Object value)
+				 Object getAttribute(String name)
+		作用范围：一次会话的范围(多次请求)。
+		
+	应用范围(ServletContext)：
+		创建：服务器启动时创建，为每个web项目创建一个单独的ServletContext对象
+		销毁：服务器关闭时，或者从服务器中移除时。
+		存取数据： void setAttribute(String name,Object value)
+				 Object getAttribute(String name)
+		作用范围：整个应用。

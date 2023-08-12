@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQuery文档操作 综合案例</title>
+<script type="text/javascript" src="../js/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$(":button").click(function(){
+			// 创建1个tr 4个td
+			var tr = $("<tr></tr>");
+			var td1 = $("<td></td>");
+			var td2 = $("<td></td>");
+			var td3 = $("<td></td>");
+			var td4 = $("<td></td>");
+			
+			// 向新建td中添加相关内容
+			td1.append($("#username").val());
+			td2.append($("#phone").val());
+			td3.append($("#email").val());
+			
+			//创建一个链接
+			var del = $("<a href='javascript:void(0)'>删除</a>");
+			td4.append(del);
+			
+			//完成删除
+			del.click(function(){
+				//parent()获得 包含所有匹配元素的唯一父元素 的元素集合
+				//$(this).parent().parent().remove();
+				
+				//parents()获得一个 包含所有匹配元素的祖先元素的 元素集合(不包含根元素)。
+				$(this).parents("tr").remove();
+			});
+			
+			// 将td添加到tr中 将tr添加到table中
+			tr.append(td1).append(td2).append(td3).append(td4);
+			$("#tab").append(tr);
+		});
+	});
+</script>
+</head>
+<body>
+<div align="center">
+	<table id="tab" border="1">
+		<tr>
+			<td>姓名</td>
+			<td>电话</td>
+			<td>邮箱</td>
+			<td>删除</td>
+		</tr>
+	</table>
+	<hr>
+	姓名:<input type="text" id="username"/>
+	电话:<input type="text" id="phone"/>
+	邮箱:<input type="text" id="email"/>
+	<input type="button" value="添加"/>
+</div>
+</body>
+</html>

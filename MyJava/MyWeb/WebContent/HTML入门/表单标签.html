@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>学习 HTML 语言  表单标签</title>
+</head>
+<body>
+	<!-- 1、定义一个表单  <form>表单内容<form>  用于提交用户填写的数据-->
+	<!-- 2、在表单中定义表单项 <input> <select> -->
+	<!-- <input/>标签  type设置标签的种类：text、password、radio、checkbox、reset等
+	name：单选框、复选框进行数据的分组 设置参数名   value：设置参数值
+	checked：设置单选框、复选框的默认选中状态   readonly：设置该标签的参数只读，不能修改 -->
+	
+	<!-- action:将数据提交到何处。默认本页。 可以提交到内网路径(绝对路径和相对路径)和外网路径 
+	 method:以何种方式提交数据。默认get。 get--把数据拼接到地址栏。 post--把数据提交到请求体。 尽量使用post方式-->
+	<form action="Demo.html" method="get">
+		用户名: <input type="text" name="username"/> <br/>
+		密码: <input type="password" name="password"/> <br/>
+		
+		<!-- 单选框，用户只能选择不能输入 指定value属性  否则提交的都是on -->
+		性别: <input type="radio" name="sex" value="man" checked="checked"/> 男
+		      <input type="radio" name="sex" value="woman"/> 女
+		<br/>
+		
+		爱好: 
+		<input type="checkbox" name="hobby" value="movie"/> 电影
+		<input type="checkbox" name="hobby" value="games"/> 游戏
+		<input type="checkbox" name="hobby" value="programe" checked="checked"/> 编程
+		<br/>
+		
+		照片: <input type="file" name="photo"/>   <!-- file属性设置附件框，用于提交文件 -->
+		<br/>
+		
+		<!-- <select></select>定义一个选择框  name-参数名 multiple-显示全部选项，可以进行多提交，默认单选 -->
+		<!-- <option></option>选项标签 内容体只用于展示   value-设置需要提交的参数值 selected-设置默认选中 -->
+		<select name="address">
+			<option value="">选择城市</option>
+			<option value="1" selected="selected">北京</option> 
+			<option value="2">上海</option> 
+			<option value="3">深圳</option>
+		</select> <br /> <br />
+		
+		<select name="hobby" multiple="multiple">
+			<option value="work">工作</option>
+			<option value="walk">散步</option>
+			<option value="fish">钓鱼</option>
+		</select>
+		<br />
+		
+		<!-- <textarea>文本域标签  name-设置参数名
+		文本框不能换行，文本域可以。  文本框的参数值是value属性，文本域参数值是内容体。
+		-->
+		个人简介:<textarea name="introduction">提交的是这的内容</textarea>
+		
+		
+		<!-- 表单点击提交按钮，提交数据时。 ？参数列表  参数列表的格式： 参数1=参数值1&参数2=参数值2&...-->
+		<input type="submit" value="注册"/>	<!-- 提交按钮 -->
+		<input type="reset"/>	<!-- 重置按钮 -->
+		<input type="button" value="我是普通按钮"/>	<!-- 普通按钮 -->
+		<br />
+		
+	</form>
+	<br/>
+	
+	
+	
+</body>
+</html>

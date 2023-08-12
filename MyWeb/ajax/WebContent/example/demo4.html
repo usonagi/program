@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>案例 显示商品信息</title>
+<script type="text/javascript" src="/ajax/js/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//将div隐藏
+		$("#content").hide();
+		
+		$("#a").toggle(function(){
+			//向服务器发送请求，在页面上显示商品信息
+			var url = "/ajax/product";
+			$.post(url,function(data){
+				var jsonObj = eval(data);
+				//处理响应的json数据，封装成table
+				var tab = $("<table border='1'><tr><td>编号</td><td>名称</td><td>数量</td><td>价格</td></tr></table>");
+				for(var i=0;i < jsonObj.length; i++){
+					var obj = jsonObj[i];
+					var tr = $("<tr><td>"+obj.id+"</td><td>"+obj.name+"</td><td>"+obj.count+"</td><td>"+obj.price+"</td></tr>");
+					tab.append(tr);
+				}
+				//将tab添加到div
+				$("#content").append(tab);
+				//显示div
+				$("#content").show();
+			},"json");
+		},function(){
+			//将商品信息隐藏,并清空之前的内容
+			$("#content").hide();
+			$("#content").html("");
+		});
+	});
+</script>
+</head>
+<body>
+	<a href="javascript:void(0)" id="a">显示商品信息</a>
+	<div id="content">
+	</div>
+</body>
+</html>

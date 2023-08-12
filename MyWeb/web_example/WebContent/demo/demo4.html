@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jsonp跨域问题原理</title>
+<script type="text/javascript" src="/web_example/js/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	//原理：使用js代码在页面上添加一个新的<script>标签
+	//定义一个在页面上添加新的<script>标签的函数
+	function addScript(src){
+		//创建script标签
+		var script = document.createElement("script");
+		//设置script的属性
+		script.setAttribute("type", "text/javascript");
+		script.src = src;
+		//将script添加到页面
+		document.body.appendChild(script);
+	}
+	
+	//页面加载完成后，向addScript传递参数，向服务器发送请求
+	window.onload=function(){
+		addScript("http://localhost:8080//ajax/product?callback=cb");
+	};
+	
+	//设置回调函数
+	function cb(data){
+		var jsonObj = eval(data);
+		$.each(jsonObj,function(i){
+			alert(jsonObj[i].name);
+		});
+	}
+</script>
+</head>
+<body>
+
+</body>
+</html>

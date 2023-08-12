@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>学习CSS 基本选择器</title>
+	<!-- 元素选择器：即以HTML标签名作为选择器名称 -->
+	<!-- 格式： 标签名{ /*CSS代码*/ }  适用范围：适用于将相同样式作用在多个同名标签 -->
+	
+	<!-- 类选择器：每个HTML标签都有一个class属性，以class属性值作为选择器名 -->
+	<!-- 格式：.类名{ /*CSS代码*/ } 适用于将样式一次作用在相同类名的标签上 -->
+	
+	<!-- ID选择器：每个HTML标签都有一个id属性(唯一)，以id属性值作选择器名 -->
+	<!-- 格式：#id值{ /*CSS代码*/ } 适用于将样式作用于某个标签上-->
+	
+	<!-- 层级关系 标签与标签之间有层级关系  对基本选择器进行组合表现出层级关系 -->
+	<!-- 格式：选择器1 选择器2 ... { /*CSS样式代码*/ } -->
+	<style>
+		span{
+			font-size: 60px;
+		}
+		
+		.Red{
+			color:red;
+		}
+		
+		#s1{
+			color:blue;
+		}
+		
+		div font{
+			color:purple;
+		}
+		
+	</style>
+</head>
+<body>
+	<span id="s1">i am span1 ...</span>
+	<span class="Red">i am span2 ... hello ...</span>
+	
+	<div class="Red">我是DIV1，红色</div>
+	<div>我是DIV2，黑色</div>
+	
+	<div>
+		<font>我变成紫色</font>
+		我想保持黑色
+	</div>
+	<font>我保持黑色</font>
+	
+</body>
+</html>

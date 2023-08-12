@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>过滤选择器  基本过滤选择器</title>
+<script type="text/javascript" src="../js/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//1、设置表格第一行为蓝色
+		//$("tr:first").css("color","blue");	//first表示获取第一个元素
+		
+		//2、设置表格除了第一行，颜色为绿色
+		//$("tr:not(tr:first)").css("color","green"); //not表示去除所有与给定选择器匹配的元素
+		//$("tr:gt(0)").css("color","green");  //gt匹配所有大于给定索引值的元素,索引值从0开始计数
+		
+		//3、设置表格的奇数行和偶数行颜色不一致	奇数红偶数黄
+		//$("tr:odd").css("color","red");  //even/odd 匹配所有索引值为 偶数/奇数 的元素，从0开始计数
+		//$("tr:even").css("color","yellow");
+		
+		//4、设置页面标题为灰色
+		$(":header").css("color","gray");  //header匹配h1、h2之类的标题元素
+	});
+</script>
+</head>
+<body>
+	<h1>商品信息</h1>
+	<table border="1">
+		<tr>
+			<td>商品编号</td>
+			<td>商品名称</td>
+			<td>商品价格</td>
+			<td>商品数量</td>
+		</tr>
+		<tr>
+			<td>001</td>
+			<td>电视机</td>
+			<td>2000</td>
+			<td>100</td>
+		</tr>
+		<tr>
+			<td>002</td>
+			<td>笔记本</td>
+			<td>4000</td>
+			<td>200</td>
+		</tr>
+		<tr>
+			<td>003</td>
+			<td>手机</td>
+			<td>3000</td>
+			<td>500</td>
+		</tr>
+	</table>
+</body>
+</html>

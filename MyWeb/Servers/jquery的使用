@@ -1,0 +1,61 @@
+导入jquery文件：<script type="text/javascript" src="js/jquery-3.4.1.js"></script>  src路径是相对本页面的
+
+相关内容可参考 D:\Download\webtools\jquery _zh.chm
+
+jQuery核心函数	=====演示 jquery/demo2.html
+	jQuery(callback) 是$(document).ready()的简写。jQuery中$相当于jQuery。
+		$(document).ready(function(){});页面加载完成后，指定的函数执行。
+		
+	jQuery(html,[ownerDocument]) []表示可选，参数1是html代码，参数2用于设置dom的相关属性。
+	作用是将一个dom对象(html)包装成jQuery对象。	jQuery中定义的方法和属性只有jQuery对象可以调用。
+	将jQuery对象->dom对象   jquery对象[0] 或 jquery.get(0) 
+	
+	jQuery([selector,[context]]) 参数1是css选择器，参数2指定要查找的dom集(指定查找地)
+	作用是用于在页面上根据css选择器查找。
+	
+	
+jQuery选择器	  重点掌握表单相关的	=====演示 jquery/demo3.html	demo4.html
+	基本选择器	
+		#id 根据id属性查找一个元素
+		element 根据元素的标签名称查找元素
+		.class	根据元素的class属性查找元素
+		*		匹配所有元素
+		selector1,selector2,...selectorn	将每一个选择器匹配到的元素合并后返回  $("s1,s2,...")
+	层级选择器	根据元素的关系来获取元素
+		空格		得到元素下的所有子元素(包含直接元素和间接元素)
+		大于号	只获取直接的子元素
+		加号		只获取直接的一个兄弟元素
+		波浪线~	所有的后边的兄弟元素
+	过滤选择器	是在上两个选择器获取一批元素后，对其进行过滤操作，使用过滤选择器基本上是":"开头，除属性过滤器外。
+		内容过滤选择器：根据元素内部文本内容进行选择。
+		可见性过滤选择器： 匹配display:none或表单中input hidden这样的元素。
+		属性过滤选择器： 根据元素的属性进行过滤。  ^=:匹配属性以某些开始的元素  $=:匹配属性以某些值结束的元素   *=:匹配属性包含某些值的元素
+		子元素过滤选择器：根据子元素顺序获取元素。
+		表单过滤选择器：用于选取表单中的元素。
+		表单对象属性过滤选择器：根据表单对象的属性获取元素。
+	
+jQuery常用函数或方法总结
+	html()方法,无参数表示得到元素中的html代码，有参数表示设置元素的html信息
+	text()方法,无参数表示得到元素中的文本信息，有参数表示设置元素的文本信息
+	each()方法，可以遍历元素用法：each(function(n)),n表示元素的序号，在函数中通过this可以获取其dom对象。
+	index()方法，返回元素的序号。
+	css()方法，可以设置元素的样式。若只有一个值css(name,value);若有多个值css({name:value,name:value,...});
+	val()方法，获取元素当前的值。
+	show()方法，让元素显示出来。
+	hide()方法，让元素隐藏起来。
+	attr()方法，设置或返回被选元素的属性值。一个参数是返回属性值，两个参数是设置属性。
+	失去焦点事件：blur(function(){})			点击事件：click(function(){})
+	trim()方法，去掉字符串前后空格
+	submit()方法，用于表单提交。
+	
+jQuery扩展	====演示  /demo/serialize、插件 .html
+	serialize方法：将表单数据序列化成请求的参数。
+	serializeArray方法：将表单数据序列化，返回的是json数据格式。
+	插件机制与自定义插件：jQuery.extend()方法，扩展jQuery全局对象本身-$.。jQuery.fn.extend()方法，扩展jQuery元素集-$("#x").
+	
+jQuery文档操作    ====演示 /fdemo/demo1~3
+
+jQuery的事件	  ====演示/fdemo/demo4
+	jQuery中事件允许绑定多个函数，而JavaScript中一个事件只能绑定一个函数。
+	
+jQuery案例  分页操作  ====演示 web_example/demo5   采用Java EE三层架构

@@ -1,0 +1,23 @@
+配置运行环境：
+	window--preferenc--server--Runtime Eviroment 
+	添加服务：Add -- 选择tomcat服务器  【next】--添加tomcat的安装目录 【finish】
+	切换JavaEE视图，下方选择servers，点击【No servers....】创建服务，选择tomcat 【finish】
+	点击上述相同位置，点击tomcat--open 在server locations 下选择 Use Tomcat installation...  deploy path改为webapps
+	
+在eclipse中发布web项目：
+	创建一个web项目：new--Dynamic Web Project  	module version选择2.5 【finish】
+	创建一个页面：在WebConten下new--html file
+	发布项目：在下方servers 右击tomcat -- add and remove  【Add】 【finish】
+	启动tomcat：在下方servers 右击tomcat --start
+	访问项目：1、点击上方运行按钮即可  2、在浏览器输入http://localhost:8080/页面名字 
+	window -- web browser -- 选择浏览器
+	
+
+Tomcat虚拟主机的配置
+	虚拟主机：在电脑上设置一个目录，使用一个名称与该目录进行绑定。这个路径称为虚拟主机。主机可以发布web项目。
+	创建一个目录: D:xxx   添加web项目website   添加网页example.html
+	配置虚拟主机：tomcat --conf --server.xml	修改相应配置,详情见server.xml
+	修改本地hosts文件： 路径-C:\Windows\System32\drivers\etc\hosts  添加本地ip地址和域名 192.168.88.1  www.xxx.com
+	修改端口号：server.xml中,将port="8080"-->port="80"   修改后无效！！
+	去掉路径中的website：在server.xml中的虚拟主机host中添加 <Context path="/" docBase="website"/>
+	配置默认首页：在conf --web.xml中 最下方<welcome-file-list> 添加首页 </welcome-file-list>

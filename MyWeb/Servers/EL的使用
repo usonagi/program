@@ -1,0 +1,19 @@
+EL--Expression Language   表达式语言
+
+作用：EL和JSTL一起使用取代 jsp页面嵌入Java代码写法。
+
+EL的功能	前3个重要		演示web-02/demo5
+	EL获取数据	EL所获取的数据需要在jsp的四个作用范围中。若查找对象不存在，则返回空字符串""。	
+	EL执行运算
+	EL获取web开发常用的对象   EL定义了11个web开发常用对象，使用这些对象可以获取web开发常见对象，并读取这些对象中的数据
+		pageContext:	相当于jsp内置对象中pageContext
+		pageScope,requestScope,sessionScope,applicationScope:获取指定域下的名称的数据。
+		param:			在页面中接受请求参数(接收一个名称对应一个值参数)
+		paramValues:	在页面中接受请求参数(接收一个名称对应多个值参数)
+		header:			在页面上获取请求头(获取一个key对应一个value头)。
+		headerValues:	在页面上获取请求头(获取一个key对应多个value头)。
+		cookie:			访问cookie的名称和值(${cookie.key.name} ${cookie.key.value})。
+		initParam:		获取全局初始化参数的值
+	EL调用Java方法
+	
+EL 语法 ： ${ EL 表达式 }

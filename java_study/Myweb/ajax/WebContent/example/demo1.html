@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>案例 验证用户名 Ajax版</title>
+<script type="text/javascript" src="/ajax/js/my.js"></script>
+<script type="text/javascript">
+	//验证用户名是否可用
+	function checkUsername(){
+		//1、得到文本框中的信息
+		var usernameValue = document.getElementById("username").value;
+		
+		//2、使用ajax向服务器发送请求，并携带username信息
+		//2.1 获取XMLHttpRequest对象
+		var xmlHttp = getXmlHttpRequest();
+		
+		//2.2 设置回调函数
+		xmlHttp.onreadystatechange = function(){
+			//2.5 根据服务器的响应情况，进行数据处理
+			if(xmlHttp.readyState == 4){
+				 if(xmlHttp.status == 200){
+					 var Msg = xmlHttp.responseText;
+				 }
+					//3、处理服务器响应的数据，在span中显示
+					document.getElementById("username_msg").innerHTML = Msg;
+			}
+		};
+		
+		//2.3 设置请求路径与方式
+		xmlHttp.open("POST","/ajax/UserServlet");
+		
+		//2.4 发送请求
+		xmlHttp.setRequestHeader("content-type","application/x-www-form-urlencoded");
+		xmlHttp.send("username="+usernameValue);
+	}
+</script>
+</head>
+<body>
+	<input type="text" id="username" onblur="checkUsername()"/>
+	<span id="username_msg"></span>
+</body>
+</html>

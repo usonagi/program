@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>学习JavaScript </title>
+	<!-- JS无需编译，直接被浏览器解释并执行；JS无法单独运行，必须嵌入到HTML代码中；执行过程由上到下 -->
+	<!-- JS没有访问系统文件的权限，在保证可读性的情况下允许使用链式编程 -->
+	
+	<!-- ECMAScript(核心)--规定了JS的语法和基本对象
+		 DOM 文档对象模型--处理网页内容的方法和接口  标记型文档--HTML
+		 BOM 浏览器对象模型--与浏览器交互的方法和接口 -->
+		 
+	<!-- JS的引用方式--内部引用和外部引用  外部引用--在script标签中使用src标签引入js文件-->
+	<!-- 开发规范规定 script标签的位置在body结束标签前  增强用户体验 -->
+	
+	<!-- 使用CTRL+shift+c注释或取消注释  CTRL+shift+/注释  -->
+	<!-- 变量的声明--var 变量名;  变量的默认值为undefined -->
+	<!-- 基本数据类型：string、boolean、number、null、undefined  ""和''都是字符串，JS中没有单个字符 -->
+	
+	<!-- 比较运算符--JS中的运算符和Java中基本相同  js有全等运算符=== 比较类型和值  -->
+	<!-- 逻辑运算符--JS也和Java相同，但是没有”&“，只有&&、||和！三个 -->
+	
+	<!-- 正则对象--使用直接量方法创建 var reg=/^表达式$/; ^表示开始，$表示结束， -->
+	
+	<!-- JS中的数组可以看作Java中的ArrayList集合，数组成员没有类型限制，长度可以自动修改。
+	创建方式：var arr=[1,2,"a",true];  var arr=new Array(); -->
+	<script type="text/javascript" src="demo1.js">
+		//外部引用时script标签中的内容不会被执行。
+		alert("此处代码不执行！")
+	</script>
+	
+	<script type="text/javascript">
+		//有src的script标签中的内容不会被执行，没有src的则会被执行。
+		alert("没有src的script标签内容可以执行！")
+		
+		/* var a = 10;
+		a = true;	//变量不严格遵守数据类型 通过typeof可以判断数据类型 null返回object
+		alert(a);
+		alert(typeof(null)); */
+		
+		/* var x = 8;
+		alert(x=="8");	//值相同，字符串转换成数字进行比较，返回true
+		alert(x==="8");	//值相同，类型不同，返回false */
+		
+		//直接量方式 /^表达式$/：必须全部字符合正则式，否则返回false,适用于表单校验
+		//普通方式 /表达式/：除非全部字符不符合正则式，否则返回true,适用于字符串查找、替换
+		/* var reg = /^\s*$/;	//表示0~多个空格，正则式不是字符串，不能用引号表示
+		alert(reg.test("dd")); */
+		
+		/* var arr = ["hello",true,7151];
+		alert(arr.length)	//打印数组长度 */
+		/* arr[5] = "6个元素";	//下标从0开始，arr[3],arr[4]用undefined填充
+		alert(arr.length) */
+		
+		/* var res = arr.join("+");	//使用+号对数组成员拼接成字符串，不影响arr数组
+		alert(res);
+		
+		var rev = arr.reverse();	//将数组进行物理翻转(下标互换)，会影响arr数组
+		alert(rev); */
+		
+		//pop()删除并返回数组的最后一个元素。push()向数组末尾添加元素，返回新的长度。
+		/* alert(arr.pop());
+		alert(arr.length);
+		
+		alert(arr.push("新元素","new"));
+		alert(arr); */
+		
+		//=====全局函数=====
+		//eval(string) 可以将传入的字符串当作JavaScript脚本代码执行,不能传入字符串对象
+		/* eval("var x = 100;")
+		alert(x); */
+		
+		//URI是统一资源标识符，标识资源的详细名称，包含资源名；URL是统一资源定位器，定位资源的网络位置，包含http://。
+		//encodeURI(string) 对字符串进行URI编码，返回值就是编码后的结果。
+		/* var msg = "http://www.hngxy.cn/login.html?username=张三&password=1234";
+		var encode = encodeURI(msg);
+		alert(encode);
+		
+		//decodeURI(string) 对字符串进行URI解码，返回值是解码后的结果。
+		alert(decodeURI(encode)); */
+		
+		//parseInt()解析一个字符串并返回一个整数，忽略小数部分。parseFloat()解析一个字符串并返回一个浮点数。
+		//如果字符串的某个字符从字面值上无法转为数字，那么从该字符开始停止转换，仅返回前面正确的转换值。NaN--数字标识符
+		/* var str = "18b0.3a4a";
+		var strint = parseInt(str);
+		var strfloat = parseFloat(str);
+		
+		alert(typeof(strint)+":"+strint);
+		alert(typeof(strfloat)+":"+strfloat); */
+		
+		//=====自定义函数=====
+		/*格式：function 方法名(参数列表) { 函数体 } function不能大写，无需返回值与返回值类型，参数无需var关键字，
+		return可以不写、return 返回值 或者 仅仅写return。JS的函数调用一定有返回值，默认undefined*/
+		function getSum(a,b) {
+			return a+b;
+		}
+		
+		//=====自定义对象=====
+		/*无形参格式：function 对象名() { 函数体 }*/
+		/* function Person(){	//定义属性
+			this.name = "定义属性";	//使用this关键字在声明对象时定义属性。
+		}
+		
+		function Person2(name,age)	//为属性赋值
+		{
+			this.name = name;
+			this.age = age;
+		}
+		
+		var p = new Person();
+		alert(p.name);
+		p.age = 18;		//创建对象后，使用对象.属性 方式，动态创建并定义属性。
+		alert(p.age);
+		
+		var p2 = new Person2("小明","20");
+		p2.name = "改名叫小李";	//为属性赋值
+		alert(p2.name+":"+p2.age); */
+		
+		/*对象直接量方式，格式： var 对象名={属性名1:"属性值1",属性名2:"属性值2",...}*/
+		//该方式直接创建出实例对象，无需使用new创建对象，直接使用即可。
+		var man = {name:"小刘",sex:"男",age:16};
+		alert(man.name+":"+man.sex+":"+man.age);
+	</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Refresh" content="5;url=/web_test/Response/Response2.html">
+<title>页面定时跳转</title>
+<script type="text/javascript">
+	var i = 5;
+	function load(){
+		window.setInterval("changeSeconds()", 1000);
+	}
+	function changeSeconds(){
+		i--;
+		document.getElementById("sc").innerHTML=i;
+	}
+</script>
+</head>
+<body onload="load()">
+<h1>Response1</h1>
+<h3>此页面将在<span id="sc">5</span>秒后跳转到Response2</h3>
+</body>
+</html>

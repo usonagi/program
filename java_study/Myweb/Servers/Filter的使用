@@ -1,0 +1,39 @@
+Filter称为过滤器，web开发人员通过filter技术对web服务器所管理的资源进行拦截，从而实现一些特殊的功能。
+
+在web.xml中配置过滤器
+	<filter>
+	  	<filter-name>过滤器名称</filter-name>
+	  	<filter-class>过滤器Java类全路径</filter-class>
+	  	<!-- 配置初始化参数 -->
+  		<init-param>
+	  		<param-name>参数名称</param-name>
+	  		<param-value>参数的值</param-value>
+  		</init-param>
+  	</filter>
+  	<filter-mapping>
+	  	<filter-name>过滤器名称</filter-name>
+	  	<url-pattern>/*</url-pattern>   //拦截的请求
+  	</filter-mapping>
+  	
+  	filter-mapping中的相关配置
+  	<url-pattern>	完全路径匹配 以/开始、目录匹配 以/开始，以*结束、扩展名匹配 只能以*开始
+  	<servlet-name>	以servlet的配置名称拦截servlet。 可以用上述直接拦截路径，通常不用。
+  	<dispatcher>	dispatcher的四个取值： 1、2常用。
+  					REQUEST：请求  默认值。过滤器默认拦截请求。
+  					FORWARD：转发。
+  					INCLUDE：页面包含的时候进行拦截。
+  					ERROR：	页面出现全局错误页面跳转的时候进行拦截。
+  	
+======演示   web_test/com.filter.demo
+
+FilterChain对象
+	在一个web应用中，可以开发编写多个Filter，这些Filter组合起来称为一个过滤器链。
+	web服务器根据Filter在web.xml中的mapping配置顺序决定Filter的调用顺序，依次调用过滤器，若没有下一个过滤器，则调用目标资源。
+	
+
+Filter的生命周期
+	Filter的创建和销毁是由web服务器负责。web应用启动时，wen服务器创建Filter的实例对象，并调用其init方法进行初始化。
+	每次filter进行拦截的时候，都会执行doFilter方法。当服务器关闭时或应用从服务器移除时服务器会销毁Filter对象。
+	
+FilterConfig对象		=====演示  FilterDemo4
+	作用：用来获取Filter的相关配置

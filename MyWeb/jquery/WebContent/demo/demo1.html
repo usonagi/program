@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../js/jquery-1.8.3.js"></script>
+
+<script type="text/javascript" >
+	//hello 2 会覆盖掉前一个
+	/* window.onload=function(){
+		alert("hello");
+	}
+	
+	window.onload=function(){
+		alert("hello 2");
+	} */
+	
+	//使用jquery完成上述操作  不会覆盖之前的
+	//$(function(){
+	//	alert("hello jquery");
+	//});
+	//$(function(){
+	//	alert("hello jquery start");
+	//});
+	
+	//最完整的写法
+	jQuery(document).ready(function(){
+		alert("Hello first!");
+	});
+	
+	//简写1
+	$(document).ready(function(){
+		alert("Hello second!");
+	});
+	
+	//简写2
+	jQuery(function(){
+		alert("Hello third!");
+	});
+	
+	//简写3
+	$(function(){
+		alert("Hello fourth!")
+	});
+</script>
+</head>
+<body>
+<h3>jquery 测试页面</h3>
+</body>
+</html>

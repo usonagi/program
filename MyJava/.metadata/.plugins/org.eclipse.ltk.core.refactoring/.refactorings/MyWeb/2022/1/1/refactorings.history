@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;MyWeb/WebContent/BootStrap/BootStrap.html&apos; to &apos;环境搭建.html&apos;" description="Rename resource &apos;BootStrap.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="WebContent/BootStrap/BootStrap.html" name="环境搭建.html" stamp="1641009366219" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;MyWeb/WebContent/BootStrap/环境搭建.html&apos; to &apos;基本模板.html&apos;" description="Rename resource &apos;环境搭建.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="WebContent/BootStrap/环境搭建.html" name="基本模板.html" stamp="1641009392327" updateReferences="true"/>
+</session>

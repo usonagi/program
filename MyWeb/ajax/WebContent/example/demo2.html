@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>案例 关联选项-省市联动</title>
+<script type="text/javascript" src="/ajax/js/my.js"></script>
+<script type="text/javascript">
+	//获取省份信息
+	function getProvince(){
+		var xmlHttp = getXmlHttpRequest();
+		// 设置回调函数
+		xmlHttp.onreadystatechange = function(){
+			
+			if(xmlHttp.readyState == 4){
+				 if(xmlHttp.status == 200){
+					 //将从服务器得到的信息填充到下拉框
+					 var province = xmlHttp.responseText;
+					 var ps = province.split(",");	//split函数将字符串分割成数组
+					 
+					 //使用html.dom完成将数组填充到下拉框
+					 for(var i=0;i<ps.length;i++){
+						 //创建option
+						 var option = document.createElement('option');
+						 //将文本添加到option
+						 option.text = ps[i];
+						 //将option添加到下拉框中
+						 document.getElementById("province").add(option);
+					 }
+				 }
+			}
+		};
+		
+		//设置请求路径与方式
+		xmlHttp.open("POST","/ajax/province");	//路径是servlet的访问路径
+		
+		//发送请求
+		xmlHttp.setRequestHeader("content-type","application/x-www-form-urlencoded");
+		xmlHttp.send(null);
+	}
+	
+	//获取城市信息
+	function getCity(){
+		//得到省份名称
+		//得到省份下拉框元素<select>
+		var provinceElement = document.getElementById("province");
+		//得到下拉框中的所有option
+		var ops = provinceElement.options;
+		//根据选择的option对象得到其文本
+		var provinceName = ops[provinceElement.selectedIndex].text;
+		
+		//向服务器发送请求
+		var xmlHttp = getXmlHttpRequest();
+		// 设置回调函数
+		xmlHttp.onreadystatechange = function(){
+			
+			if(xmlHttp.readyState == 4){
+				 if(xmlHttp.status == 200){
+					 //清空城市下拉框信息
+					 document.getElementById("city").innerHTML="<option>---请选择城市---</option>";
+					 
+					 //得到服务器响应的信息
+					 var cities = xmlHttp.responseText;
+					 var cs = cities.split(",");	//split函数将字符串分割成数组
+					 
+					 //使用html.dom完成将数组填充到下拉框
+					 for(var i=0;i<cs.length;i++){
+						 //创建option
+						 var option = document.createElement('option');
+						 //将文本添加到option
+						 option.text = cs[i];
+						 //将option添加到下拉框中
+						 document.getElementById("city").add(option);
+					 }
+				 }
+			}
+		};
+		
+		//设置请求路径与方式
+		xmlHttp.open("POST","/ajax/city");	//路径是servlet的访问路径
+		
+		//发送请求
+		xmlHttp.setRequestHeader("content-type","application/x-www-form-urlencoded");
+		xmlHttp.send("provinceName="+provinceName);
+	}
+</script>
+</head>
+<body onload="getProvince()">
+	<select id="province" onchange="getCity()">
+		<option>---请选择省份---</option>
+	</select>
+	
+	<select id="city" >
+		<option>---请选择城市---</option>
+	</select>
+</body>
+</html>

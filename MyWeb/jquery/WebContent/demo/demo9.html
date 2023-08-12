@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>过滤选择器 子元素过滤选择器</title>
+<script type="text/javascript" src="../js/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//1、设置列表中第二个li字号为30
+		//nth-child(index),参数index从1开始,也可以设置odd、even、倍数(2n)
+		//$("ul li:nth-child(2)").css("font-size",30);
+		
+		//2、设置列表中第一行字体为红色
+		//$("ul li:first-child").css("color","red");
+		
+		//3、设置列表中最后一行字体为蓝色
+		//$("ul li:last-child").css("color","blue");
+		
+		//4、获取ul下只有一个li的信息
+		//alert($("ul li:only-child").html());
+		
+		//5、第一个ul 第二个li的颜色为红色 contains('Java')
+		$("#1 li:nth-child(2)").css("color","green");
+	});
+</script>
+</head>
+<body>
+	<ul id="1">
+		<li>Java</li>
+		<li>C++</li>
+		<li>Python</li>
+		<li>Linux</li>
+	</ul>
+	<ul>
+		<li>手机</li>
+		<li>平板</li>
+		<li>笔记本</li>
+	</ul>
+	<ul>
+		<li>HNGXY</li>
+	</ul>
+</body>
+</html>
