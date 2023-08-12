@@ -1,4 +1,0 @@
-/**
- * 
- */
-alert("初次学习Javascript")

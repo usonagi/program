@@ -1,5 +1,0 @@
-127.0.0.1 - - [01/Jan/2022:12:16:24 +0800] "GET /MyWeb/BootStrap/%E5%9F%BA%E6%9C%AC%E6%A8%A1%E6%9D%BF.html HTTP/1.1" 200 1306
-127.0.0.1 - - [01/Jan/2022:12:16:24 +0800] "GET /css/bootstrap.min.css HTTP/1.1" 404 1034
-127.0.0.1 - - [01/Jan/2022:12:16:24 +0800] "GET /js/jquery-3.4.1.min.js HTTP/1.1" 404 1036
-127.0.0.1 - - [01/Jan/2022:12:16:24 +0800] "GET /MyWeb/..js/bootstrap.min.js HTTP/1.1" 404 1046
-127.0.0.1 - - [01/Jan/2022:12:16:24 +0800] "GET /MyWeb/..js/bootstrap.min.js HTTP/1.1" 404 1046
