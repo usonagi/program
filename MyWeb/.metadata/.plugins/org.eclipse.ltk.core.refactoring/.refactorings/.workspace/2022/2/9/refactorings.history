@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;login_filter&apos; to &apos;web_LoginFilter&apos;" description="Rename resource &apos;login_filter&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/login_filter" name="web_LoginFilter" stamp="1645704983526" updateReferences="true"/>
-</session>

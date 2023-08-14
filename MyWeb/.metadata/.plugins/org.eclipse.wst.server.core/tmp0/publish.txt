@@ -1,5 +1,0 @@
-#Tomcat publish data
-#Sat Jun 25 17:00:49 CST 2022
-org.eclipse.jst.jee.server\:ajax=D\:\\apache-tomcat-8.0.5-study\\webapps\\ajax
-org.eclipse.jst.jee.server\:ppca_manage=D\:\\apache-tomcat-8.0.5-study\\webapps\\ppca_manage
-org.eclipse.jst.jee.server\:ppca_main=D\:\\apache-tomcat-8.0.5-study\\webapps\\ppca_main

@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;web_login/WebContent/jsp&apos; to &apos;jstl&apos;" description="Rename resource &apos;jsp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="WebContent/jsp" name="jstl" stamp="1645263480640" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;web_login/WebContent/jstl&apos; to &apos;jstlDemo&apos;" description="Rename resource &apos;jstl&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="WebContent/jstl" name="jstlDemo" stamp="1645263502029" updateReferences="true"/>
-</session>
