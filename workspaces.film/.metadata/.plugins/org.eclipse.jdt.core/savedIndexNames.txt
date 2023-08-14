@@ -1,4 +1,0 @@
-INDEX VERSION 1.127+D:\eclipse64\workspaces.film\.metadata\.plugins\org.eclipse.jdt.core
-1193612520.index
-3331899593.index
-955456471.index
